@@ -3,7 +3,7 @@
 #include "math.h"
 
 mainDriver::mainDriver(void):
-leftStick(leftStickPort),		// as they are declared above.
+leftStick(leftStickPort),		// as they are declared above, kevin was here to show how to fork and do pull requests
 rightStick(rightStickPort),
 coDriverStick(coDriverStickPort),
 gamePad(GAMEPADPORT),

@@ -1,4 +1,4 @@
-/*#include "WPILib.h"
+#include "WPILib.h"
 #include "BigBlueBallShooter.h"
 #include "MainDriver.h"
 #include "Support.h"
@@ -16,7 +16,7 @@
  *	Charles Estabooks: Programming Mentor and C/C++ Guy
  *	Test string to see if changes to the code are going into svn properly or not
  */
-/*class Robot_2014 : public SimpleRobot
+class Robot_2014 : public SimpleRobot
 {
 	mainDriver *Driver;
 	DriverStationLCD *DsLCD;
@@ -60,7 +60,7 @@ public:
 	/**
 	 * CRE 01-11-14 Attempting to add test code.
 	 */
-	/*void Test() {
+	void Test() {
 		while (IsTest() && IsEnabled())
 		{
 			float range;
@@ -93,7 +93,7 @@ public:
 	//				Driver->Go(0.0, 0.0);
 				}
 				*/
-				/*Wait(.5);			
+				Wait(.5);			
 			}
 		}
 	}
@@ -101,7 +101,7 @@ public:
 	/**
 	 * Drive left & right motors for 2 seconds then stop
 	 */
-	/*void Autonomous(void)
+	void Autonomous(void)
 	{
 //		gyro->Reset();
 //		float range = rangeFront->getRangeFt();
@@ -116,13 +116,8 @@ public:
 /*				if (range < 5.0){
 					shooter->Wind();
 				}
-<<<<<<< HEAD
-				*/
-			/*}
-=======
 				
 			}
->>>>>>> b61bf240228f8fc30b02a6d2ab771c1a30a5f71d
 			if (IsAutonomous()  && IsEnabled() ){
 				printf("RangeFront: %f\n", range);
 					// Brake
@@ -220,5 +215,5 @@ public:
 	}
 };
 
-START_ROBOT_CLASS(Robot_2014);*/
+START_ROBOT_CLASS(Robot_2014);
 

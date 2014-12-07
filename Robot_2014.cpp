@@ -1,4 +1,4 @@
-/*#include "WPILib.h"
+#include "WPILib.h"
 #include "BigBlueBallShooter.h"
 #include "MainDriver.h"
 #include "Support.h"
@@ -11,13 +11,12 @@
  *	Team 1740
  *	Aerial Assist Code
  *	Programming Staff:
- *	Brian Healy: Team Captain and Labview / TI89 guy
+ *	Brian Healy: Team Captain and Labview / TI84 guy
  *	Kevin Konrad: Programming Captain and Python / C++ guy
- *	Henry Crain: Programming Majordomo and Python / C++ guy
  *	Charles Estabooks: Programming Mentor and C/C++ Guy
  *	Test string to see if changes to the code are going into svn properly or not
  */
-/*class Robot_2014 : public SimpleRobot
+class Robot_2014 : public SimpleRobot
 {
 	mainDriver *Driver;
 	DriverStationLCD *DsLCD;
@@ -61,7 +60,7 @@ public:
 	/**
 	 * CRE 01-11-14 Attempting to add test code.
 	 */
-	/*void Test() {
+	void Test() {
 		while (IsTest() && IsEnabled())
 		{
 			float range;
@@ -94,7 +93,7 @@ public:
 	//				Driver->Go(0.0, 0.0);
 				}
 				*/
-				/*Wait(.5);			
+				Wait(.5);			
 			}
 		}
 	}
@@ -102,12 +101,13 @@ public:
 	/**
 	 * Drive left & right motors for 2 seconds then stop
 	 */
-	/*void Autonomous(void)
+	void Autonomous(void)
 	{
 //		gyro->Reset();
-		float range = rangeFront->getRangeFt();
+//		float range = rangeFront->getRangeFt();
 
 		if (IsAutonomous() && IsEnabled()) { // Kevin's Kludgy code fixed by Henry 01-11-14
+			/*
 			shooter->stopFork();
 			while (range > 6.5 && IsAutonomous() && IsEnabled())
 			{
@@ -116,8 +116,8 @@ public:
 /*				if (range < 5.0){
 					shooter->Wind();
 				}
-				*/
-			/*}
+				
+			}
 			if (IsAutonomous()  && IsEnabled() ){
 				printf("RangeFront: %f\n", range);
 					// Brake
@@ -126,6 +126,11 @@ public:
 				Driver->Go(0.0, 0.0);
 				shooter->Shoot();
 			}
+			*/
+			Driver->Go(1, 0.0);
+			Wait(1.6);
+			Driver->Go(0, 0.0);
+
 		}
 		while (IsAutonomous()) {
 			Wait(.05);
@@ -144,6 +149,7 @@ public:
 //		SmartDashboard::PutBoolean("In Teleop", true);
 		while (IsOperatorControl()){
 			Driver->teleopDrive();
+//			SmartDashboard::PutBoolean("Winder Limit Switch", robot->shooter->returnWinderLimit());
 			Wait(0.005);
 		}
 		stopTasks();
@@ -162,6 +168,7 @@ public:
 			}
 			SmartDashboard::PutBoolean("inRange", robot->rangeFront->inRange());
 			SmartDashboard::PutNumber("Range", robot->rangeFront->getRangeFt());
+			printf("notificationloop\n");
 			// the following lines cannot be put on the dashboard by my loop, so i threw them here
 			SmartDashboard::PutNumber("JS1-Axis1", robot->Driver->Lefty());
 			SmartDashboard::PutNumber("JS1-Axis2", robot->Driver->Leftx());
@@ -198,15 +205,15 @@ public:
 		sprintf(name, "coDriverThread-%ld", GetFPGATime());
 		coDriveTask = new Task(name, (FUNCPTR)this->coDriverTask);
 		coDriveTask->Start((INT32)this);	
-//		sprintf(name, "notificationThread-%ld", GetFPGATime());
-//		notificationTask = new Task(name, (FUNCPTR)this->notifierTask);
-//		notificationTask->Start((INT32)this);
+		sprintf(name, "notificationThread-%ld", GetFPGATime());
+		notificationTask = new Task(name, (FUNCPTR)this->notifierTask);
+		notificationTask->Start((INT32)this);
 	}
 	void stopTasks(void){
 		coDriveTask->Stop();
-//		notificationTask->Stop();
+		notificationTask->Stop();
 	}
 };
 
-START_ROBOT_CLASS(Robot_2014);*/
+START_ROBOT_CLASS(Robot_2014);
 

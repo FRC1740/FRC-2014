@@ -1,0 +1,83 @@
+#include "WPILib.h"
+#include "BigBlueBallShooter.h"
+
+BigBlueBallShooter::BigBlueBallShooter(void):
+	winderMotor(WINDER_MOTOR_PORT),
+	winderLimit(WINDER_LIMIT_PORT)
+{
+	this->pSolenoid1 = new Solenoid(CYLINDER_PORT1); // connect solenoid to proper channel on pneumatics card
+//	this->pSolenoid2 = new Solenoid(CYLINDER_PORT2); // connect solenoid to proper channel on pneumatics card
+	this->Release();
+	this->winderMotor.Set(0);
+}
+void BigBlueBallShooter::Release()
+{
+	this->pSolenoid1->Set(false);
+//	this->pSolenoid2->Set(true);
+}
+
+void BigBlueBallShooter::Engage()
+{
+	this->pSolenoid1->Set(true);
+//	this->pSolenoid2->Set(false);
+}
+void BigBlueBallShooter::Wind(){
+	this->Engage();
+	winderMotor.Set(1.0);
+}
+void BigBlueBallShooter::Kick(){
+	winderMotor.Set(-1.0);
+	Wait(.05);
+	this->stopWind();
+}
+void BigBlueBallShooter::stopWind(){
+	winderMotor.Set(0);
+}
+void BigBlueBallShooter::Shoot()
+{
+	// Engage winder gear
+	this->Engage();
+	// Wait until the limit switch is pressed
+	while (winderLimit.Get() == 0)
+	{
+		// wind
+		this->Wind();
+		Wait(.01);
+	}
+	this->Fire();
+}
+void BigBlueBallShooter::Fire(){
+		// disengage winder gear to shoot
+		this->Release();
+		// Reverse motor briefly to jar the cylinder loose and allow spring to retract
+		this->Kick();
+}
+ForkLift::ForkLift(void):
+	lifterMotor(LIFTER_MOTOR_PORT),
+	upperLimit(FORK_UPPER_LIMIT_PORT),
+	lowerLimit(FORK_UPPER_LIMIT_PORT)
+{
+}
+void ForkLift::raise()
+{
+	if (this->upperLimit.Get() == 0)
+	{
+		this->lifterMotor.Set(-.5);
+	}
+	else{
+		this->lifterMotor.Set(0);
+	}
+}
+void ForkLift::lower()
+{
+	if (this->lowerLimit.Get() == 0)
+	{
+		this->lifterMotor.Set(.1);
+	}
+	else{
+		this->lifterMotor.Set(0);
+	}
+}
+void ForkLift::stop(){
+	this->lifterMotor.Set(0);
+}
